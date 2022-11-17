@@ -16,6 +16,9 @@
     <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
 
+    <!-- luxon -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.1.0/build/global/luxon.min.js" defer></script>
+
     <!-- javascript -->
     <script src="script.js" defer></script>
 </head>
@@ -50,7 +53,7 @@
             </div>
             <!-- SEARCH -->
             <div class="search-section">
-                <button class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="search-button" @click="searchContact"><i class="fa-solid fa-magnifying-glass"></i></button>
                 <input type="text" class="search-bar" v-model="research" @keyup="searchContact">
             </div>
             <!-- CHATLIST -->
@@ -63,7 +66,7 @@
                         <h4 class="contact-name">{{ contact.name }}</h4>
                         <div class="contact-last-message" v-if="contact.messages.length != 0">{{ contact.messages[contact.messages.length - 1].message }}</div>
                     </div>
-                    <span class="last-message-time">16:00</span>
+                    <span class="last-message-time" v-if="contact.messages.length != 0">{{ contact.messages[contact.messages.length - 1].time }}</span>
                 </div>
 
             </div>
@@ -76,7 +79,9 @@
                     <img :src="contacts[currentChat].avatar">
                     <div class="receiver-info-text">
                         <h4>{{ contacts[currentChat].name }}</h4>
-                        <span>Ultimo accesso alle ore 12:00</span>
+                        <!-- Cosi l'orario cambia in base all'ultimo messaggio ma non ha molto senso, soprattuto se non ci sono messaggi in chat -->
+                        <span v-if="contacts[currentChat].messages.length != 0">Ultimo accesso alle ore {{ contacts[currentChat].messages[contacts[currentChat].messages.length - 1].time }}</span>
+                        <!-- <span>Ultimo accesso alle ore 12:00</span> -->
                     </div>
                 </div>
                 <div class="user-icons">
@@ -91,7 +96,7 @@
                 <div v-for="(msg, idue) in contacts[currentChat].messages" :keys="msg.message" class="full-message">
                     <div class="generic-message" :class="{sentmessage: msg.status === 'sent', receivedmessage: msg.status === 'received'}">
                         <span class="message-text">{{ msg.message }}</span>
-                        <span class="message-time">12:00</span>
+                        <span class="message-time">{{ msg.time }}</span>
                         <div class="message-menu-arrow" :class="{sentmenuarrow: msg.status === 'sent', receivedmenuarrow: msg.status === 'received'}" @click="openMenu(idue)"><i class="fa-solid fa-chevron-down"></i></div>
                         <div class="message-menu" :keys="msg.message" :class="{sentmenu: msg.status === 'sent', receivedmenu: msg.status === 'received', open: msg.window}">
                             <ul class="menu-options">
