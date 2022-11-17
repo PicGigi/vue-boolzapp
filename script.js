@@ -171,6 +171,7 @@ new Vue({
         currentChat: 0,
         newMsg: '',
         research: '',
+        closedOpend: false,
     },
     methods: {
         selectedChat(index){
@@ -199,13 +200,17 @@ new Vue({
         },
         searchContact(){
             for(let i=0; i<this.contacts.length; i++){
-                if(this.research === this.contacts[i].name.slice(0, this.research.length)){
+                if(this.contacts[i].name.toLowerCase().includes(this.research.toLowerCase())){
                     this.contacts[i].visible = true
                 }
                 else{
                     this.contacts[i].visible = false
                 }
             }
+        },
+        openMenu(){
+            this.closedOpend = !this.closedOpend
+            console.log(this.closedOpend)
         }
     }
 })

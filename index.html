@@ -11,6 +11,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="style.css">
+    <style>[v-cloak]{display: none;}</style>
 
     <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
@@ -22,7 +23,7 @@
 <body>
     <div class="green-bar"></div>
     <div class="gray-bar"></div>
-    <div class="main-section" id="app">
+    <div class="main-section" id="app" v-cloak>
         <!-- LEFT SECTION -->
         <div class="left-section">
             <!-- USER -->
@@ -87,10 +88,17 @@
             <!-- CHAT -->
             <div class="chat-section">
 
-                <div v-for="msg in contacts[currentChat].messages" class="generic-message">
-                    <div :class="{sentmessage: msg.status === 'sent', receivedmessage: msg.status === 'received'}">
+                <div v-for="msg in contacts[currentChat].messages" class="full-message">
+                    <div class="generic-message" :class="{sentmessage: msg.status === 'sent', receivedmessage: msg.status === 'received'}">
                         <span class="message-text">{{ msg.message }}</span>
                         <span class="message-time">12:00</span>
+                        <div class="message-menu-arrow" :class="{sentmenu: msg.status === 'sent', receivedmenu: msg.status === 'received'}" @click="openMenu"><i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="message-menu" >
+                            <ul class="menu-options">
+                                <li>Info Messaggio</li>
+                                <li>Cancella Messaggio</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
