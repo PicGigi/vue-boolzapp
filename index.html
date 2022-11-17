@@ -29,7 +29,7 @@
 <body>
     <div class="green-bar"></div>
     <div class="gray-bar"></div>
-    <div class="main-section">
+    <div class="main-section" id="app">
         <!-- LEFT SECTION -->
         <div class="left-section">
             <!-- USER -->
@@ -57,105 +57,31 @@
             <!-- SEARCH -->
             <div class="search-section">
                 <button class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input type="text" class="search-bar">
+                <input type="text" class="search-bar" v-model="research" @keyup="searchContact">
             </div>
             <!-- CHATLIST -->
             <div class="chatlist-section">
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U02LHLUHGEA-db9eaaddd1e6-512" class="contact-picture">
+
+                <!-- CONTATTI -->
+                <div v-for="(contact, i) in contacts" class="chatlist-contact" :class="{visible: contact.visible}" @click="selectedChat(i)">
+                    <img :src="contact.avatar" class="contact-picture">
                     <div class="contact-info">
-                        <h4 class="contact-name">Henri</h4>
-                        <div class="contact-last-message">Henri grazie che pushi sempre &hearts; ti lovvo</div>
+                        <h4 class="contact-name">{{ contact.name }}</h4>
+                        <div class="contact-last-message">{{ contact.messages[0].message }}</div>
                     </div>
                     <span class="last-message-time">16:00</span>
                 </div>
 
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U02SY08FBAB-e38560810027-512" class="contact-picture">
-                    <div class="contact-info">
-                        <h4 class="contact-name">Francesco</h4>
-                        <div class="contact-last-message">Grazie per l'aiuto con quel problema di sintassi!</div>
-                    </div>
-                    <span class="last-message-time">15:00</span>
-                </div>
-
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U0362DFPC5U-26be495585eb-512" class="contact-picture">
-                    <div class="contact-info">
-                        <h4 class="contact-name">Domenico</h4>
-                        <div class="contact-last-message">Grazie per il recap di ieri!</div>
-                    </div>
-                    <span class="last-message-time">14:00</span>
-                </div>
-
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U01ACLWHWMT-5300b63df393-512" class="contact-picture">
-                    <div class="contact-info">
-                        <h4 class="contact-name">Adriano</h4>
-                        <div class="contact-last-message">Mi dispiace ma ho deciso di abbandonare Boolean.. questo esercizio è troppo lungo..</div>
-                    </div>
-                    <span class="last-message-time">13:00</span>
-                </div>
-
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U02JZ1TSZ0U-4054f2f77576-512" class="contact-picture">
-                    <div class="contact-info">
-                        <h4 class="contact-name">Eugenia</h4>
-                        <div class="contact-last-message">Ciao scusa non mi è ancora arrivata la bag di Boolean..</div>
-                    </div>
-                    <span class="last-message-time">12:00</span>
-                </div>
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U02LHLUHGEA-db9eaaddd1e6-512" class="contact-picture">
-                    <div class="contact-info">
-                        <h4 class="contact-name">Henri</h4>
-                        <div class="contact-last-message">Henri grazie che pushi sempre &hearts; ti lovvo</div>
-                    </div>
-                    <span class="last-message-time">16:00</span>
-                </div>
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U02LHLUHGEA-db9eaaddd1e6-512" class="contact-picture">
-                    <div class="contact-info">
-                        <h4 class="contact-name">Henri</h4>
-                        <div class="contact-last-message">Henri grazie che pushi sempre &hearts; ti lovvo</div>
-                    </div>
-                    <span class="last-message-time">16:00</span>
-                </div>
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U02LHLUHGEA-db9eaaddd1e6-512" class="contact-picture">
-                    <div class="contact-info">
-                        <h4 class="contact-name">Henri</h4>
-                        <div class="contact-last-message">Henri grazie che pushi sempre &hearts; ti lovvo</div>
-                    </div>
-                    <span class="last-message-time">16:00</span>
-                </div>
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U02LHLUHGEA-db9eaaddd1e6-512" class="contact-picture">
-                    <div class="contact-info">
-                        <h4 class="contact-name">Henri</h4>
-                        <div class="contact-last-message">Henri grazie che pushi sempre &hearts; ti lovvo</div>
-                    </div>
-                    <span class="last-message-time">16:00</span>
-                </div>
-                <div class="chatlist-contact">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U02LHLUHGEA-db9eaaddd1e6-512" class="contact-picture">
-                    <div class="contact-info">
-                        <h4 class="contact-name">Henri</h4>
-                        <div class="contact-last-message">Henri grazie che pushi sempre &hearts; ti lovvo</div>
-                    </div>
-                    <span class="last-message-time">16:00</span>
-                </div>
             </div>
-
         </div>
         <!-- RIGHT SECTION -->
         <div class="right-section">
             <!-- RECEIVER -->
             <div class="receiver-section">
                 <div class="receiver-info">
-                    <img src="https://ca.slack-edge.com/T91QPE3BP-U02LHLUHGEA-db9eaaddd1e6-512">
+                    <img :src="contacts[currentChat].avatar">
                     <div class="receiver-info-text">
-                        <h4>Henri</h4>
+                        <h4>{{ contacts[currentChat].name }}</h4>
                         <span>Ultimo accesso alle ore 12:00</span>
                     </div>
                 </div>
@@ -168,42 +94,9 @@
             <!-- CHAT -->
             <div class="chat-section">
 
-                <div class="generic-message">
-                    <div class="sent-message">
-                        <span class="message-text">Ciao Prof!</span>
-                        <span class="message-time">12:00</span>
-                    </div>
-                </div>
-
-                <div class="generic-message">
-                    <div class="received-message">
-                        <span class="message-text">Ciao!</span>
-                        <span class="message-time">12:00</span>
-                    </div>
-                </div>
-
-                <div class="generic-message">
-                    <div class="sent-message">
-                        <span class="message-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut ipsam voluptatum exercitationem nam doloribus hic. Beatae unde rem nesciunt ratione aperiam pariatur exercitationem corrupti vero quisquam! Unde aliquid distinctio adipisci!
-                        Impedit ad quibusdam provident vel qui eius eligendi, aliquid officiis ex accusantium commodi iure distinctio quia, laborum dolor necessitatibus asperiores quisquam perspiciatis minima accusamus. Labore aut assumenda magnam! Repellendus, facere.
-                        Dolorem, magni omnis libero nemo quod tenetur cupiditate! Ullam quasi, nihil cumque quod velit reprehenderit eligendi tenetur laborum, odit sunt illum facere rerum officiis nisi itaque, aliquam vel dignissimos eos.
-                        Rerum accusamus aspernatur consequuntur soluta quos corporis in veritatis laborum, nobis voluptas pariatur autem blanditiis minima, sunt odit vel, ab fugiat sit architecto vitae. Consectetur sapiente similique tempora provident doloremque.
-                        Explicabo, esse nostrum iusto similique natus eum ab! Adipisci esse placeat aliquid labore obcaecati quis beatae sunt voluptas ipsum. Sequi beatae aliquid provident eveniet excepturi fuga magnam. Modi, ab exercitationem.
-                        Voluptate libero doloremque non provident neque repellat ab molestiae eveniet itaque perspiciatis, debitis nesciunt, blanditiis laudantium, beatae nobis aut pariatur impedit nam dolore vitae odit voluptatum error. Animi, fuga modi.
-                        Minima repellat qui suscipit ut nisi voluptatem, nulla officiis earum dolor aliquam saepe inventore eos. In, magnam quis ab autem nostrum vel vitae distinctio quam rerum praesentium. Ratione, in ipsum?</span>
-                        <span class="message-time">12:00</span>
-                    </div>
-                </div>
-
-                <div class="generic-message">
-                    <div class="received-message">
-                        <span class="message-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore voluptas rem vitae ad ab sed autem dicta, maiores doloremque eius culpa. Soluta commodi animi nihil porro rem ea veniam? Delectus.
-                        Facilis expedita unde magnam recusandae adipisci, corrupti totam nostrum laboriosam quibusdam praesentium aut optio et numquam consequuntur error vitae sunt reiciendis qui neque minus, velit ratione ut dicta. Vel, voluptate.
-                        Vitae dolorum officia autem doloremque dolore, eligendi suscipit aut quae quia eum! Veniam a reprehenderit cumque nesciunt quisquam aperiam dignissimos corporis neque distinctio, quis adipisci veritatis necessitatibus? Asperiores, atque temporibus.
-                        Dicta id excepturi natus nihil atque exercitationem quos nobis? Quidem, repudiandae perferendis? Praesentium amet hic soluta ad quam quod, doloribus enim rerum doloremque voluptatem laboriosam esse velit odio reprehenderit molestias.
-                        Sequi quos quae sunt aperiam officiis possimus magnam aliquid nulla reprehenderit commodi fuga quasi fugiat soluta consectetur reiciendis enim iste dolores qui, exercitationem tempore dolore aspernatur. Dignissimos sed consequatur natus.
-                        Repellat distinctio rem culpa sed omnis asperiores magni doloribus eos mollitia, aliquam neque eaque nisi quibusdam tenetur est beatae veritatis odit! Optio modi nihil aspernatur aliquam accusamus maiores laborum assumenda?
-                        Architecto quis dolorum et facilis. Consectetur tenetur repellendus cum deleniti architecto recusandae iure eveniet reprehenderit iste commodi! Qui, repudiandae! Unde id iusto rem corporis molestiae temporibus. Vel delectus voluptates accusamus?</span>
+                <div v-for="msg in contacts[currentChat].messages" class="generic-message">
+                    <div :class="{sentmessage: msg.status === 'sent', receivedmessage: msg.status === 'received'}">
+                        <span class="message-text">{{ msg.message }}</span>
                         <span class="message-time">12:00</span>
                     </div>
                 </div>
@@ -212,7 +105,7 @@
             <!-- SENDING -->
             <div class="sending-section">
                 <i class="fa-regular fa-face-smile"></i>
-                <input type="text" class="sending-input" placeholder="Scrivi un messaggio">
+                <input type="text" class="sending-input" placeholder="Scrivi un messaggio" v-model="newMsg" @keyup.enter="sendMsg">
                 <i class="fa-solid fa-microphone"></i>          
             </div>
         </div>
