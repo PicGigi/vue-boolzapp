@@ -61,7 +61,7 @@
                     <img :src="contact.avatar" class="contact-picture">
                     <div class="contact-info">
                         <h4 class="contact-name">{{ contact.name }}</h4>
-                        <div class="contact-last-message">{{ contact.messages[contact.messages.length - 1].message }}</div>
+                        <div class="contact-last-message" v-if="contact.messages.length != 0">{{ contact.messages[contact.messages.length - 1].message }}</div>
                     </div>
                     <span class="last-message-time">16:00</span>
                 </div>
@@ -88,15 +88,15 @@
             <!-- CHAT -->
             <div class="chat-section">
 
-                <div v-for="msg in contacts[currentChat].messages" class="full-message">
+                <div v-for="(msg, idue) in contacts[currentChat].messages" :keys="msg.message" class="full-message">
                     <div class="generic-message" :class="{sentmessage: msg.status === 'sent', receivedmessage: msg.status === 'received'}">
                         <span class="message-text">{{ msg.message }}</span>
                         <span class="message-time">12:00</span>
-                        <div class="message-menu-arrow" :class="{sentmenu: msg.status === 'sent', receivedmenu: msg.status === 'received'}" @click="openMenu"><i class="fa-solid fa-chevron-down"></i></div>
-                        <div class="message-menu" >
+                        <div class="message-menu-arrow" :class="{sentmenuarrow: msg.status === 'sent', receivedmenuarrow: msg.status === 'received'}" @click="openMenu(idue)"><i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="message-menu" :keys="msg.message" :class="{sentmenu: msg.status === 'sent', receivedmenu: msg.status === 'received', open: msg.window}">
                             <ul class="menu-options">
                                 <li>Info Messaggio</li>
-                                <li>Cancella Messaggio</li>
+                                <li @click="deleteMsg(idue)">Cancella Messaggio</li>
                             </ul>
                         </div>
                     </div>

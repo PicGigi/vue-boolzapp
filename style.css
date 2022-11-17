@@ -149,7 +149,6 @@ body{
     height: 60px;
 }
 .contact-info{
-    margin-bottom: 1rem;
     width: 75%;
 }
 .contact-last-message{
@@ -158,6 +157,7 @@ body{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 1rem;
 }
 .last-message-time{
     position: absolute;
@@ -212,6 +212,7 @@ body{
     margin: 0 2rem 0 auto;
     display: flex;
     flex-direction: column;
+    word-break: break-all;
     position: relative;
 }
 .receivedmessage{
@@ -223,6 +224,7 @@ body{
     margin: 0 auto 0 2rem;
     display: flex;
     flex-direction: column;
+    word-break: break-all;
     position: relative;
 }
 .message-time{
@@ -233,7 +235,6 @@ body{
 }
 .message-menu-arrow{
     position: absolute;
-    /* visibility: hidden; */
     top: 0;
     right: .4rem;
     border-radius: 50%;
@@ -243,24 +244,33 @@ body{
 .generic-message:hover .message-menu-arrow{
     visibility: visible;
 }
-.sentmenu{
+.sentmenuarrow{
     background-color: #d5f9ba;
 }
-.receivedmenu{
+.receivedmenuarrow{
     background-color: white;
 }
 .message-menu{
-    background-color: white;
-    width: 200px;
+    width: 175px;
     position: absolute;
-    top: 1.4rem;
-    right: -11rem;
     padding: .5rem;
     border-radius: 10px;
     color: white;
     background-color: #6b747a;
     z-index: 10;
     cursor: pointer;
+    visibility: hidden;
+}
+.open{
+    visibility: visible;
+}
+.sentmenu{
+    top: 1.4rem;
+    right: .5rem;
+}
+.receivedmenu{
+    top: 1.4rem;
+    right: -9.5rem;
 }
 .menu-options{
     list-style: none;

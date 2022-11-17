@@ -10,18 +10,21 @@ new Vue({
                     {
                     date: '10/01/2020 15:30:55',
                     message: 'Ciao Prof!',
-                    status: 'sent'
-                    },
+                    status: 'sent',
+                        window: false,
+                },
                     {
                     date: '10/01/2020 15:50:00',
                     message: 'Domani c\'è lezione?',
-                    status: 'sent'
-                    },
+                    status: 'sent',
+                        window: false,
+                },
                     {
                     date: '10/01/2020 16:15:22',
                     message: 'Si! Domani approfondiamo Vue',
-                    status: 'received'
-                    }
+                    status: 'received',
+                        window: false,
+                }
                 ],
             },
             {
@@ -32,18 +35,21 @@ new Vue({
                     {
                     date: '20/03/2020 16:30:00',
                     message: 'Grazie per l\'aiuto nell\'esercizio di ieri!',
-                    status: 'sent'
-                    },
+                    status: 'sent',
+                        window: false,
+                },
                     {
                     date: '20/03/2020 16:30:55',
                     message: 'Di nulla! Al prossimo ticket!',
-                    status: 'received'
-                    },
+                    status: 'received',
+                        window: false,
+                },
                     {
                     date: '20/03/2020 16:35:00',
                     message: 'Al prossimo ticket!',
-                    status: 'sent'
-                    }
+                    status: 'sent',
+                        window: false,
+                }
                 ],
             },
             {
@@ -54,18 +60,21 @@ new Vue({
                     {
                     date: '28/03/2020 10:10:40',
                     message: 'Ho caricato il recap di ieri su Drive.',
-                    status: 'received'
-                    },
+                    status: 'received',
+                        window: false,
+                },
                     {
                     date: '28/03/2020 10:20:10',
                     message: 'Grazie vado subito a guardarlo!',
-                    status: 'sent'
-                    },
+                    status: 'sent',
+                        window: false,
+                },
                     {
                     date: '28/03/2020 16:15:22',
                     message: 'Prego!',
-                    status: 'received'
-                    }
+                    status: 'received',
+                        window: false,
+                }
                 ],
             },
             {
@@ -76,18 +85,21 @@ new Vue({
                     {
                     date: '10/01/2020 15:30:55',
                     message: 'Mi dispiace ma ho deciso di lasciare Boolean..',
-                    status: 'sent'
-                    },
+                    status: 'sent',
+                        window: false,
+                },
                     {
-                        date: '10/01/2020 15:30:55',
+                        date: '10/01/2020 15:45:55',
                         message: 'Questo esercizio è troppo difficile..',
-                        status: 'sent'
-                        },
+                        status: 'sent',
+                        window: false,    
+                    },
                     {
                     date: '10/01/2020 15:50:00',
                     message: 'Forza e coraggio! Ce la puoi fare!',
-                    status: 'received'
-                    }
+                    status: 'received',
+                        window: false,
+                }
                 ],
             },
             {
@@ -98,13 +110,15 @@ new Vue({
                     {
                     date: '10/01/2020 15:30:55',
                     message: 'Ciao, non è ancora arrivata la mia bag di Boolean..',
-                    status: 'sent'
-                    },
+                    status: 'sent',
+                        window: false,
+                },
                     {
                     date: '10/01/2020 15:50:00',
                     message: 'Non preoccuparti, la tua paperella sta arrivando!',
-                    status: 'received'
-                    }
+                    status: 'received',
+                        window: false,
+                }
                 ],
             },
             {
@@ -115,8 +129,9 @@ new Vue({
                     {
                         date: '10/01/2020 15:30:55',
                         message: 'Ciao sono solo una prova per vedere se funziona la search bar!',
-                        status: 'received'
-                        },
+                        status: 'received',
+                        window: false,    
+                    },
                 ],
             },
             {
@@ -127,8 +142,9 @@ new Vue({
                     {
                         date: '10/01/2020 15:30:55',
                         message: 'Ciao sono solo una prova per vedere se funziona la search bar!',
-                        status: 'received'
-                        },
+                        status: 'received',
+                        window: false,    
+                    },
                 ],
             },
             {
@@ -139,8 +155,9 @@ new Vue({
                     {
                         date: '10/01/2020 15:30:55',
                         message: 'Ciao sono solo una prova per vedere se funziona la search bar!',
-                        status: 'received'
-                        },
+                        status: 'received',
+                        window: false,    
+                    },
                 ],
             },
             {
@@ -151,8 +168,9 @@ new Vue({
                     {
                         date: '10/01/2020 15:30:55',
                         message: 'Ciao sono solo una prova per vedere se funziona la search bar!',
-                        status: 'received'
-                        },
+                        status: 'received',
+                        window: false,    
+                    },
                 ],
             },
             {
@@ -163,15 +181,16 @@ new Vue({
                     {
                         date: '10/01/2020 15:30:55',
                         message: 'Ciao sono solo una prova per vedere se funziona la search bar!',
-                        status: 'received'
-                        },
+                        status: 'received',
+                        window: false,    
+                    },
                 ],
             },
         ],
         currentChat: 0,
         newMsg: '',
         research: '',
-        closedOpend: false,
+        openClose: true,
     },
     methods: {
         selectedChat(index){
@@ -195,6 +214,7 @@ new Vue({
                 date: 'da vedere',
                 message: 'Ok',
                 status: 'received',
+                window: false,
             }
             this.contacts[this.currentChat].messages.push(newObjMsg);
         },
@@ -208,9 +228,13 @@ new Vue({
                 }
             }
         },
-        openMenu(){
-            this.closedOpend = !this.closedOpend
-            console.log(this.closedOpend)
+        openMenu(indexdue){
+            this.contacts[this.currentChat].messages[indexdue].window = !this.contacts[this.currentChat].messages[indexdue].window
+        },
+        deleteMsg(indexdue){
+            this.contacts[this.currentChat].messages.splice(indexdue, 1)
         }
+
+
     }
 })
